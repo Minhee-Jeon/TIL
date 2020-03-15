@@ -1,9 +1,9 @@
 # algorithms
 Solving algorithm problems with JAVA language
 
-> 자기가 할 수 있다면, 할 수 있다고 믿으면, 할 수 있게 되고.
+> 자기가 할 수 있다면, 할 수 있다고 믿으면, 할 수 있게 되고
 
-  할 수 없다고 믿으면, 당연히 할 수 없게 된다.
+> 할 수 없다고 믿으면, 당연히 할 수 없게 된다.
   
 [단계별로 풀어보기](https://www.acmicpc.net/step)
 ```java
@@ -18,14 +18,14 @@ class Solution {
 
 * 공부순서
   
-  * 100제 (백준 단계별로 풀어보기 [진행중])
+  * 백준 단계별로 풀어보기 [진행중] [100+]
   * Programmers / Greedy Algorithm [50]
   * BFS / DFS / Brute-force-search [50]
   * Dynamic programming [50]
   
   * 기출
-    * 삼성 - 백준 온라인 저지
-    * 카카오 - 
+    * Samsung - 백준 온라인 저지
+    * Kakao - Programmers
 
 * Algorithm
 
@@ -57,14 +57,6 @@ class Solution {
     * Trie
     * MST (최소 스패닝 트리)
     * Dynamic Programming 
-
-
-
-
-
-
-
-테이블은 다음과 같이 작성할 수 있습니다.
 
 
 
