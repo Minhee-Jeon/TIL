@@ -1,7 +1,8 @@
 # algorithms
 Solving algorithm problems with JAVA language
 
-> 자기가 할 수 있다면, 할 수 있다고 믿으면, 할 수 있게 되고          할 수 없다고 믿으면, 당연히 할 수 없게 된다.
+> 자기가 할 수 있다면, 할 수 있다고 믿으면, 할 수 있게 되고         
+할 수 없다고 믿으면, 당연히 할 수 없게 된다.
   
 [단계별로 풀어보기](https://www.acmicpc.net/step)
 ```java
