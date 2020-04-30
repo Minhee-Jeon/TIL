@@ -1,0 +1,49 @@
+![2875_대회or인턴](https://user-images.githubusercontent.com/58028527/80670638-692cb100-8ae2-11ea-9df1-b4af4441a999.png)
+
+```java
+import java.util.*;
+
+public class Main {
+  static int n;
+  static int m;
+  static int k;
+	
+	
+	public static void main(String[] args)   {
+		Scanner sc = new Scanner(System.in);
+		
+		n = sc.nextInt();
+		m = sc.nextInt();
+    k = sc.nextInt();
+
+    //여학생의 수가 짝수가 아니면 의미가 없다. 홀수라면 한 명을 인턴 보내기
+    if(n % 2 == 1){ 
+      n -= 1;
+      k--;
+    }
+    
+    //잉여 남학생이 있어 짝이 맞지 않으면 짝이 맞을 때까지 남학생 인턴 보내기
+    while(m*2 > n && k > 0){
+      m -= 1;
+      k--;
+    }
+    
+    //잉여 여학생이 있어 짝이 맞지 않으면 짝이 맞을 때까지 여학생 인턴 보내기
+    while(m*2 < n && k > 0){
+      n -= 1;
+      k--;
+    }
+   
+    //남은 인턴자 수에서 3을 나눈 몫만큼 대회에 나갈 팀이 줄어든다.
+    m -= k / 3;
+    
+    //3을 나눈 나머지만큼 여학생을 인턴보낸다.
+    //if(k%3 > 0) n--;
+
+    System.out.println(m);
+    
+		
+	}
+	
+}
+```
