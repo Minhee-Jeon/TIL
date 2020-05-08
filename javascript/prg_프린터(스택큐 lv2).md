@@ -93,8 +93,9 @@ function solution(priorities, location) {
     }));
     var count = 0;        
     while(true){
-        var cur = list.splice(0,1)[0];        
-        if(list.some(t=> t.val > cur.val )){
+        //var cur = list.splice(0,1)[0];    
+        var cur = list.shift();
+        if(list.some(t=> t.val > cur.val)){
             list.push(cur);                        
         }
         else{            
