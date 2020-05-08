@@ -102,5 +102,5 @@ function solution(priorities, location) {
             if(cur.my) return count;
         }
     }
-}
+} 
 ```
