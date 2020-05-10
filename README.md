@@ -7,7 +7,7 @@ Solving algorithm problems with JAVA language
 [단계별로 풀어보기](https://www.acmicpc.net/step)
 ```java
 
-class Solution {
+class Main {
   public static void main(String[] args) {
     System.out.println("Hello world!");
   }
@@ -17,14 +17,19 @@ class Solution {
 
 * 공부순서
   
-  * 백준 단계별로 풀어보기 [진행중] [100+]
+  * 백준 단계별로 풀어보기 [100+]
   * Programmers / Greedy Algorithm [50]
   * BFS / DFS / Brute-force-search [50]
   * Dynamic programming [50]
-  
-  * 기출
-    * Samsung - 백준 온라인 저지
-    * Kakao - Programmers
+  * 백준 
+    * 배열
+    * 문자열
+    * 정렬
+    * 브루트포스
+    * 재귀
+    * 백트래킹
+    * 동적계획법
+    * BFS / DFS
 
 * Algorithm
 
@@ -58,6 +63,3 @@ class Solution {
     * Dynamic Programming 
 
 
-
-** 강조사용법
-**치킨** 먹다가 ~~두드러기~~났어요. ㅠㅠ
