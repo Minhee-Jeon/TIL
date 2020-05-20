@@ -24,35 +24,35 @@ import java.util.*;
 
 
 class Main {
-		public static void main(String[] args) {
-			Scanner sc = new Scanner(System.in);
-			int n, k;
-			n = sc.nextInt();
-			k = sc.nextInt();
-				
-			int[] li = new int[n];
-			for(int i=0; i<n; i++) {
-				li[i] = sc.nextInt();
-			}
-			
-      //중복값을 없애주는 set에 3장을 더해 나올 수 있는 경우의 수 담기
-			Set<Integer> set = new HashSet<Integer>();
-			for(int i=0; i<n; i++) {
-				for(int j=i+1; j<n; j++) {
-					for(int m=j+1; m<n; m++) {
-						set.add(li[i] + li[j] + li[m]);
-					}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n, k;
+		n = sc.nextInt();
+		k = sc.nextInt();
+
+		int[] li = new int[n];
+		for(int i=0; i<n; i++) {
+			li[i] = sc.nextInt();
+		}
+
+		//중복값을 없애주는 set에 3장을 더해 나올 수 있는 경우의 수 담기
+		Set<Integer> set = new HashSet<Integer>();
+		for(int i=0; i<n; i++) {
+			for(int j=i+1; j<n; j++) {
+				for(int m=j+1; m<n; m++) {
+					set.add(li[i] + li[j] + li[m]);
 				}
 			}
-			
-      //set은 순서를 보장하지 않아 list에 옮겨담고 정렬하기
-			List<Integer> list = new ArrayList<>(set);
-			Collections.sort(list, Collections.reverseOrder());
-			System.out.println(list.get(k-1));
-				
-				
-			
 		}
+
+		//set은 순서를 보장하지 않아 list에 옮겨담고 정렬하기
+		List<Integer> list = new ArrayList<>(set);
+		Collections.sort(list, Collections.reverseOrder());
+		System.out.println(list.get(k-1));
+
+
+
+	}
 		
 }
 ```
