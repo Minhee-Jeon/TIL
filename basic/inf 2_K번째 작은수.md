@@ -15,7 +15,7 @@ N개의 숫자로 이루어진 숫자열이 주어지면 해당 숫자열중에�
 6 2 5 3
 5 2 7 3 8 9
 15 3 10 3
-4 15 8 16 6 17 3 10 11 18 7 14 7 15
+4 15 8 16 6 6 17 3 10 11 18 7 14 7 15
 ```
 ## 예제출력   
 ```
@@ -29,34 +29,31 @@ N개의 숫자로 이루어진 숫자열이 주어지면 해당 숫자열중에�
 #### JAVA   
 ```java
 public static void main(String[] args) {
-			Scanner sc = new Scanner(System.in);
-			int tc = sc.nextInt();
-			
-			for(int i=1; i<tc+1; i++) {
-            int n, s, e, k;
-				n = sc.nextInt();
-				s = sc.nextInt();
-				e = sc.nextInt();
-				k = sc.nextInt();
+	Scanner sc = new Scanner(System.in);
+	int tc = sc.nextInt();
 
-				int[] li = new int[n];
-				
-				for(int j=0; j<n; j++) {
-					li[j] = sc.nextInt();
-				}
-				
-				int[] li_ = new int[e-s+1];
-				System.arraycopy(li, s-1, li_, 0, e-s+1);
-				Arrays.sort(li_);
-				
-				//System.out.println(Arrays.toString(li_));
-				System.out.printf("\n #%d %d \n", i, li_[k-1]);
-			}
-				
-				
-				
-			
-		}
+	for(int i=1; i<tc+1; i++) {
+		int n, s, e, k;
+		n = sc.nextInt();
+		s = sc.nextInt();
+		e = sc.nextInt();
+		k = sc.nextInt();
+
+		int[] li = new int[n];
+
+		for(int j=0; j<n; j++) 
+			li[j] = sc.nextInt();
+		
+
+		int[] li_ = new int[e-s+1];
+		System.arraycopy(li, s-1, li_, 0, e-s+1);  //입력된 list를 잘라 복사해주기
+		Arrays.sort(li_);	//그걸 정렬
+
+		//System.out.println(Arrays.toString(li_));
+		System.out.printf("\n #%d %d \n", i, li_[k-1]);
+	}
+
+}
 ```
 #### Python
 ```python
