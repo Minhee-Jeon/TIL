@@ -182,6 +182,7 @@ for i in range(5):
 # i:3 j:0 j:1 j:2 j:3 j:4
 # i:4 j:0 j:1 j:2 j:3 j:4
 
+
 for i in range(5);
    for j in range(i+1): #(5-i)로 바꾸면 결과값 상하반전
       print("*")
