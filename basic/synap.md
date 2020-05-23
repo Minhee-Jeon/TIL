@@ -34,68 +34,80 @@ X 10
 - 작은 수를 큰 수로 나누는 경우 “작은 수를 큰 수로 나눌 수 없습니다.”라고 표시해 주세요.   
 - 나누기(/)의 결과 값은 몫과 나머지로 표시해 주세요.   
 - 입력은 파일이나 콘솔에서 받아도 되고 프로그램 내부에 하드코딩해도 됩니다.   
-
    
-   ```java
-   class Main2 {
+## Code   
+#### JAVA
+ ```java
+   import java.util.*;
+class Main2 {
 		public static void main(String[] args) {
 			Scanner sc = new Scanner(System.in);
-
 			System.out.println("로마자, 부호, 로마자를 띄어쓰기하며 입력해주세요. (부호: +, -, *, /)");
 			String[] inputArr = sc.nextLine().toUpperCase().split(" ");
-			System.out.println(Arrays.deepToString(inputArr));
-			
+			//System.out.println(Arrays.deepToString(inputArr));
 			int num1 = romeToInt(inputArr[0]);
 			int num2 = romeToInt(inputArr[2]);
-			
 			calculate(num1, num2, inputArr[1]);
-			
-			
-			
 		}
-		
 		//입력된 로마자를 int로
+		@SuppressWarnings("unlikely-arg-type")
 		public static int romeToInt(String r) {
-			return 0;
-		}
-		
-		public static void calculate(int num1, int num2, String sign) {
-			switch(sign) {
-			
-			case "+":
-				if (num1 + num2 > 39) 
-					System.out.println("범위를 벗어났습니다.");
-				else 
-					intToRome(num1 + num2);
-				break;
-				
-			case "-":
-				if (num1 - num2 < 0) 
-					System.out.println("작은 수에서 큰 수를 뺄 수 없습니다.");
-				else if (num1 - num2 == 0) 
-					System.out.println("범위를 벗어났습니다.");
-				else 
-					intToRome(num1 - num2);
-				break;
-				
-			case "*":
-				intToRome(num1 * num2);
-				break;
-				
-			case "/":
-				if (num1 < num2) 
-					System.out.println("작은 수를 큰 수로 나눌 수 없습니다.");
-				else { 
-					System.out.print("몫: ");
-					intToRome(num1 / num2);
-					System.out.print("나머지: ");
-					intToRome(num1 % num2);
+			//String[] rome = {"I", "V", "X"};
+			//int[] arab = {1, 5, 10};
+			Map<String, Integer> refer = new HashMap<>();
+			refer.put("I", 1);
+			refer.put("V", 5);
+			refer.put("X", 10);
+//			System.out.println(refer);
+			int arab = 0;
+			for(int i=0; i<r.length(); i++) {
+//				char now = r.charAt(i);
+//				char compare = r.charAt(i+1);      //StringIndexOutOfBoundsException
+				if(i < r.length()-1 && refer.get(r.charAt(i)+"") < refer.get(r.charAt(i+1)+"")) {
+					arab += refer.get(r.charAt(i+1)+"") - refer.get(r.charAt(i)+"");
+					i++;
 				}
+				else arab += refer.get(r.charAt(i) + "");
 			}
+			return arab;
 		}
-		
+		public static void calculate(int num1, int num2, String sign) {
+			String result = "";
+			switch(sign) {
+			case "+": 
+				result = num1 + num2 > 39 ? "범위를 벗어났습니다." : intToRome(num1 + num2);
+				break;
+			case "–": case "-":
+				if (num1 - num2 < 0) 
+					result = "작은 수에서 큰 수를 뺄 수 없습니다.";
+				else if (num1 - num2 == 0) 
+					result = "범위를 벗어났습니다.";
+				else  
+					result = intToRome(num1 - num2);
+				break;
+			case "*":
+				result = intToRome(num1 * num2);
+				break;
+			case "/":
+				result = num1 < num2? 
+						"작은 수를 큰 수로 나눌 수 없습니다." 
+						: "몫 " + intToRome(num1 / num2) + ", 나머지 " + intToRome(num1 % num2);
+			}
+			System.out.println(result);
+		}
 		//계산된 int를 로마자로 출력
-		public static void intToRome(int n) {
+		public static String intToRome(int n) {
+			//System.out.println(n);
+			String[] chart = {"index", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+			String arab = "";
+			if (n >= 10) {
+				for(int i=0; i < n/10; i++) {
+					arab += "X";
+				}
+				if(n%10 != 0) arab += chart[ n%10 ];
+			}
+			else arab = chart[n];
+			return arab;
 		}
 }
    ```
