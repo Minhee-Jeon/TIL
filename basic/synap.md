@@ -38,17 +38,31 @@ X 10
 ## Code   
 #### JAVA
  ```java
-   import java.util.*;
+  import java.util.*;
+
+
 class Main2 {
 		public static void main(String[] args) {
 			Scanner sc = new Scanner(System.in);
+
 			System.out.println("로마자, 부호, 로마자를 띄어쓰기하며 입력해주세요. (부호: +, -, *, /)");
 			String[] inputArr = sc.nextLine().toUpperCase().split(" ");
 			//System.out.println(Arrays.deepToString(inputArr));
-			int num1 = romeToInt(inputArr[0]);
-			int num2 = romeToInt(inputArr[2]);
-			calculate(num1, num2, inputArr[1]);
+			
+			if(inputArr.length == 1 || inputArr.length == 2) 
+				System.out.println("띄어쓰기 잊지 마세요^^"); 
+			else {
+				int num1 = romeToInt(inputArr[0]);
+				int num2 = romeToInt(inputArr[2]);
+				
+				calculate(num1, num2, inputArr[1]);
+				
+			}
+			
+			
+			
 		}
+		
 		//입력된 로마자를 int로
 		@SuppressWarnings("unlikely-arg-type")
 		public static int romeToInt(String r) {
@@ -60,6 +74,8 @@ class Main2 {
 			refer.put("X", 10);
 //			System.out.println(refer);
 			int arab = 0;
+			
+
 			for(int i=0; i<r.length(); i++) {
 //				char now = r.charAt(i);
 //				char compare = r.charAt(i+1);      //StringIndexOutOfBoundsException
@@ -71,13 +87,16 @@ class Main2 {
 			}
 			return arab;
 		}
+		
 		public static void calculate(int num1, int num2, String sign) {
 			String result = "";
 			switch(sign) {
+			
 			case "+": 
 				result = num1 + num2 > 39 ? "범위를 벗어났습니다." : intToRome(num1 + num2);
 				break;
-			case "–": case "-":
+				
+			case "–": case "-": //–와 -는 다른 기호였다..
 				if (num1 - num2 < 0) 
 					result = "작은 수에서 큰 수를 뺄 수 없습니다.";
 				else if (num1 - num2 == 0) 
@@ -85,21 +104,26 @@ class Main2 {
 				else  
 					result = intToRome(num1 - num2);
 				break;
+				
 			case "*":
-				result = intToRome(num1 * num2);
+				result = num1 * num2 > 39 ? "범위를 벗어났습니다." : intToRome(num1 * num2);
 				break;
+				
 			case "/":
 				result = num1 < num2? 
 						"작은 수를 큰 수로 나눌 수 없습니다." 
 						: "몫 " + intToRome(num1 / num2) + ", 나머지 " + intToRome(num1 % num2);
 			}
+			
 			System.out.println(result);
 		}
+		
 		//계산된 int를 로마자로 출력
 		public static String intToRome(int n) {
 			//System.out.println(n);
 			String[] chart = {"index", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
 			String arab = "";
+
 			if (n >= 10) {
 				for(int i=0; i < n/10; i++) {
 					arab += "X";
@@ -110,4 +134,5 @@ class Main2 {
 			return arab;
 		}
 }
+
    ```
