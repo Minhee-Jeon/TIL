@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+/**
+*문제
+타로는 자주 JOI잡화점에서 물건을 산다. JOI잡화점에는 잔돈으로 500엔, 100엔, 50엔, 10엔, 5엔, 1엔이 충분히 있고, 언제나 거스름돈 개수가 가장 적게 잔돈을 준다. 타로가 JOI잡화점에서 물건을 사고 카운터에서 1000엔 지폐를 한장 냈을 때, 받을 잔돈에 포함된 잔돈의 개수를 구하는 프로그램을 작성하시오.
+
+예를 들어 입력된 예1의 경우에는 아래 그림에서 처럼 4개를 출력해야 한다. 
+(380엔을 낸 경우 잔돈 = 620엔 / 500엔 1, 100엔 1, 10엔 2)
+
+입력
+입력은 한줄로 이루어져있고, 타로가 지불할 돈(1 이상 1000미만의 정수) 1개가 쓰여져있다.
+
+출력
+제출할 출력 파일은 1행으로만 되어 있다. 잔돈에 포함된 매수를 출력하시오.
+**/
+class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    int money = sc.nextInt();
+    int change = 1000 - money;
+
+    int ch500 = change/500; //거스름돈 중 500엔 개수
+    change -= 500*ch500;
+
+    int ch100 = change/100; //거스름돈 중 100엔 개수
+    change -= 100*ch100;
+
+    int ch50 = change/50; //거스름돈 중 50엔 개수
+    change -= 50*ch50;
+
+    int ch10 = change/10; //거스름돈 중 10엔 개수
+    change -= 10*ch10;
+
+    int ch5 = change/5; //거스름돈 중 5엔 개수
+    change -= 5*ch5;
+
+    int ch1 = change; //거스름돈 중 1엔 개수
+
+    System.out.println(ch500 + ch100 + ch50 + ch10 + ch5 + ch1);
+    
+    //너무 1차원적인 풀이임 ㅠㅠ
+    //////////////////////////////////////////////////////////////
+    
+    //잡화점이 가지고 있는 동전의 종류
+    int[] changes = {500, 100, 50, 10, 5, 1};
+    
+    //거스름돈 동전의 개수
+    int number = 0;
+    
+    //1000원을 내는 것은 정해져 있다.
+    int money_ = 1000;
+    
+    //물건의 가격을 입력받는다.
+    int price = sc.nextInt();
+    
+    //주어야 할 거스름돈을 계산한다
+    int change_ = money_ - price;
+    
+    for(int i=0; i<changes.length; i++){
+       if(change_ < changes[i]){
+          continue;
+       }
+       
+       //몫
+       int quotient = change_ / changes[i];
+       //나머지
+       int remainder = change % changes[i];
+       
+       //주어야 할 거스름돈에 나머지의 값을 넣는다.
+       change = remainder;
+       
+       number += quotient;
+    }
+    
+    System.out.println(number);
+    
+    System.exit(0);
+  }
+}
