@@ -37,10 +37,12 @@ h.onclick = function {
 ### :heavy_check_mark:표준 이벤트 모델   
 - 한번에 여러가지 이벤트핸들러 설정이 가능하다.   
 - this키워드는 이벤트발생 객체를 의미한다.   
-|메소드|내용|   
-|---|---|   
-|addEventListener(이벤트이름, 핸들러, 확장)|확장: 버블링/캡쳐링|   
-|removeEventListener(이벤트이름, 핸들러)|이벤트 삭제|   
+   
+|메소드|내용|
+|---|---|
+|addEventListener(이벤트이름, 핸들러, 확장)|확장: 버블링/캡쳐링|
+|removeEventListener(이벤트이름, 핸들러)|이벤트 삭제|
+   
 ```javascript   
 var h = document.getElementById("ID명");
 h.addEventListener('click', function(){
@@ -52,10 +54,12 @@ h.addEventListener('click', function(){
 - 익스플로러 브라우저 적용 모델   
 - 한번에 여러가지 이벤트핸들러 설정이 가능하다.   
 - this키워드가 이벤트발생 객체가 아니라 window객체를 의미한다.  
-|메소드|내용|   
-|---|---|   
+   
+|메소드|내용|
+|---|---|
 |attachEvent(이벤트이름, 핸들러)|익스플로러에만 존재하는 메소드|
-|detachEvent(이벤트이름, 핸들러)|이벤트 삭제|   
+|detachEvent(이벤트이름, 핸들러)|이벤트 삭제|
+   
 ```javascript   
 var h = document.getElementById("ID명");
 h.attachEvent('onclick', function(){ 
