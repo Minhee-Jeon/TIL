@@ -23,5 +23,22 @@ N명의 학생들의 평균(소수 첫째자리 반올림)을 구하고, N명의
 ```
 #### Python   
 ```python
+import sys
+# sys.stdin=open("input.txt", "rt")
 
+n = int(input())
+li = list(map(int,input().split()))
+
+avg = round(sum(li) / n)
+min = 2147000000
+
+for idx, x in enumerate(li):
+    tmp = abs(x - avg)
+    if tmp < min:
+        min = tmp
+        score = x 
+        res = idx +1
+    elif tmp == min:
+        if x > score:
+            score = xres = idx + 1
 ```
