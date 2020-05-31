@@ -25,9 +25,8 @@ class Main {
     int m = sc.nextInt();
 
     int[] li = new int[n+m+2];
-    List<Integer> ans = new ArrayList<>();
-
     Arrays.fill(li, 0);
+    
 
     for(int i=1; i<=n; i++){
       for(int j=1; j<=m; j++){
@@ -35,13 +34,14 @@ class Main {
       }
     }
 
-    for(int i=2; i<=n+m+2; i++){
-      if(li[i] == li의 최댓값){
-        ans.add(i);
-      }
+    int max = 0;
+    for(int i=2; i<=n+m+1; i++){
+      max = max < li[i] ? li[i] : max;
     }
-
-    System.out.println(ans);
+    for(int i=2; i<=n+m+1; i++){
+      if(li[i] == max) System.out.print(i + " ");
+    }
+  }
 }
 ```
 ### Python   
