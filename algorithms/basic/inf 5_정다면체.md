@@ -12,7 +12,7 @@
 4 6     
     
 ## 예제출력     
-1 5 6 7    
+5 6 7    
     
 ## Code    
 ### JAVA   
@@ -46,5 +46,28 @@ class Main {
 ```
 ### Python   
 ```python
+import sys
+#sys.stdin=open("input.txt", "rt")
 
+n, m = map(int,input().split())
+#li_n = list(range(1,n+1))
+#li_m = list(range(1,m+1))
+cnt = [0]*(n+m+1) #(n+m+1)크기의 list를 0으로 초기화하기
+max = 0
+
+#print(li_n,li_m)
+
+for i in range(1,n+1):
+    for j in range(1,m+1):
+        #ans.append(li_n[i] + li_m[j])
+        cnt[i+j] += 1
+
+#ans.sort()
+
+for i in range(n+m+1):
+    if cnt[i] > max:
+        max = cnt[i]
+for i in range(n+m+1):
+    if cnt[i] == max:
+        print(i, end=' ') 
 ```
