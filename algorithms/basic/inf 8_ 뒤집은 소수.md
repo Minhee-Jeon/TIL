@@ -14,4 +14,38 @@ N개의 자연수가 입력되면 각 자연수를 뒤집은 후 그 뒤집은 �
 5 32 55 62 3700 250       
    
 ## 출력예제    
-23 73
+23 73   
+   
+## Code   
+### JAVA   
+```java
+import java.util.*;
+class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    for(int i=0; i<n; i++){
+      int num = reverse(sc.nextInt());
+      if(isPrime(num)){
+        System.out.print(num + " ");
+      } 
+    }
+  } 
+  //정수 뒤집기
+  public static int reverse(int n){
+    int[] su = new int[Integer.toString(n).split("").length];
+    for(int i=su; i<0; i--){
+      su[i] = Integer.toString(n).split("")[su-1-i];
+    }
+    return String.join("", su);
+  } 
+  //소수인지 확인하기
+  public static boolean isPrime(int n){
+    return false;
+  }
+}
+```
+### Python   
+```python   
+
+```
