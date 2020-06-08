@@ -49,6 +49,30 @@
 ## Code   
 ### JAVA   
 ```java
+import java.util.*;
+class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] numArr = new int[20];
+    for(int i=1; i<=20; i++){
+      numArr[i-1] = i;
+    }
+    for(int i=0; i<10; i++){
+      reverseArr(sc.nextInt(), sc.nextInt(), numArr);
+    }
+    for(int i=0; i<20; i++){
+      System.out.print(numArr[i]+" ");
+    }
+ 
+}
+  public static void reverseArr(int ai, int bi, int[] numArr){
+    for(int i=0; i<(bi+ai)/2; i++){
+      int tmp = numArr[ai+i];
+      numArr[ai+i] = numArr[bi-i]; //ArrayIndexOutOfBoundsException
+      numArr[bi-i] = tmp;
+    }
+  }
+}
 
 ```   
 ### Python   
