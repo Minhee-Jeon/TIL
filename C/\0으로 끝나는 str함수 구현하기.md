@@ -1,9 +1,9 @@
 # \0으로 끝나는 str함수 구현하기   
-[1.strlen](#strlen-구현하기)
-[2.strcpy](#strcpy-구현하기)
-[3.strcmp](#strcmp-구현하기)
-[4.strstr](#strstr-구현하기)
-[5.strtok](#strtok-구현하기)
+[1.strlen](#strlen-구현하기)    
+[2.strcpy](#strcpy-구현하기)    
+[3.strcmp](#strcmp-구현하기)    
+[4.strstr](#strstr-구현하기)    
+[5.strtok](#strtok-구현하기)    
 
 ## strlen 구현하기
 ```c
@@ -166,6 +166,7 @@ char* my_strstr(const char* str1, const char* str2){
 ```c
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 char* my_strtok(char*, const char*);
 
 int main(void){
@@ -248,5 +249,5 @@ char* my_strtok(char* str, const char* tok){
 }
 ```
 
-      ```if(!str)```와 ```if(str == NULL || str[0]=='\0')```은 어떻게 다른 것인가??
+```if(!str)```와 ```if(str == NULL || str[0]=='\0')```은 어떻게 다른 것인가??
 
