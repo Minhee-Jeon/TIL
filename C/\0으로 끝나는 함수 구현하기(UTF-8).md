@@ -67,7 +67,120 @@ UTF-8은 표현할 문자에 따라 1바이트에서 4바이트까지 글자 크
      
       
 ## strlen 구현하기   
+```c
+#include <stdio.h>
+#include <string.h>
+int my_strlen(str);
+int utf8_strlen(char*);
 
+int main(void) {
+  char *str = "가As0限かض";
+  // printf("%d%d%d%d\n", (int)str[0], (int)str[1], (int)str[2], (int)str[3]);
+  printf("%d\n", my_strlen(str));
+}
+
+int my_strlen(char * c){
+  int szInput = 0;
+  for(int i=0; c[i]; i++){
+    szInput += 1;
+  }
+  return szInput;
+}
+```
+기존에 구현했던 ```my_strlen()```을 실행해보면 내가 예상했던 값인 ```7```이 아닌 ```14```가 리턴된다.    
+왜인가? ```my_strlen()```은 1바이트가 넘는 글자가 올 것이라는 예상을 하지 않고 구현된 **1바이트 글자만을 위한** 메소드이기 때문이다.   
+그래서 위 UTF-8 : 멀티바이트 기준 표를 참고해서 ```utf8_strlen()```을 구현해보았다.   
+   
+   
+```c
+int utf8_strlen(char * c){
+  int szInput = 0;
+  for(int i=0; c[i]; i++){
+    if(-64 <= c[i] && c[i] <= -33) i++; //2바이트 문자
+    else if(-33 < c[i] && c[i]<= -17) i += 2; //3바이트 문자
+    else if (-17 < c[i] && c[i] <= -9) i += 3; //4바이트 문자
+    szInput += 1;
+  }
+  return szInput;
+}
+```   
+UTF-8 기준 표를 보면 **2바이트** 짜리의 첫 바이트는 ```110```으로 시작하므로 ```c[i]```의 범위가 ```-64 ~ -33```일 것이고,   
+**3바이트**짜리의 첫 바이트는 ```1110```으로 시작하므로 ```-32 ~ 17```,   
+**4바이트**짜리의 첫 바이트는 ```11110```으로 시작하므로 ```-16 ~ -9```의 범위를 가질 것이라고 생각했다.   
+하지만 이렇게 보면 어떻게 저 범위가 나오는지 직관적으로 이해되지 않는다.    
+    
+```c
+int utf8_strlen(char * c){
+  int szInput = 0;
+  for(int i=0; c[i]; i++){
+    if(c[i]>>6 == -1){  //바이트 맨 처음이 11인가? (예: 2~4바이트 / 아뇨: 1바이트)
+      if(c[i]>>5 == -1){   //바이트 맨 처음이 111인가? (예: 3~4바이트 / 아뇨: 2바이트)
+        if(c[i]>>4 == -1){   //바이트 맨 처음이 1111인가? (예: 4바이트 / 아뇨: 3바이트)
+            i += 3;
+        }
+        else i += 2;
+      }
+      else i += 1;
+    }
+    szInput += 1;
+  }
+  return szInput;
+}
+```
+이번에는 shift 연산자를 이용해서 몇 바이트인지를 걸러내보았지만, 
+만약 unsigned라서 ```c[i]```를 오른쪽으로 shift 연산한 ```11111111```이 ```-1```이 되지 않으면 어떻게 되는지에 대한 해답은 내놓지 못했다.    
+여기까지는 기존의 코드에 새로 생긴 경우의 수를 덕지덕지 붙여서 작성했다면, 이번에는 기존에 작성했던 코드를 이용해 재사용성을 높였다.   
+    
+```c
+int one_char_size(char *s) {
+  return 1;
+}
+
+
+int my_strlen(char * c){
+  int szInput = 0;
+  for(int i=0; c[i]; i+=one_char_size(c+i)){
+    szInput += 1;
+  }
+  return szInput;
+}
+```    
+```my_strlen()```은 1바이트만 염두에 두었기 때문에, 이렇게 고쳐쓸 수 있다.   
+```for문```의 증감식을 따로 떼 핸들링하면 기존 함수를 더 이상 가공하지 않아도 된다.    
+   
+```c
+int one_char_size_utf8(char *s) {
+  if((s[0]&0x80) == 0) {
+      return 1;
+    }
+    /*
+    0xFF => 11111111
+    c[i] => 11001010
+    c[i]>>5 => 00000_11111110
+    */
+    else if((0x07 & (s[0]>>5)) == 0x6) {  //2바이트
+      return 2;
+    }
+    else if((0x0F & (s[0]>>4)) == 0xE) {  //3바이트
+      return 3;
+    }
+    else if((0x1F & (s[0]>>3)) == 0x1E) {  //4바이트
+      return 4;
+    }
+
+  return 1;
+}
+
+int utf8_strlen(char * c){
+  int szInput = 0;
+  for(int i=0; c[i]; i+=one_char_size_utf8(c+i)){
+    szInput += 1;
+  }
+  return szInput;
+}
+```
+핸들링할 때 ```c[0]```이 ```110```/```1110```/```11110```로 시작하는지는 shift 연산 후 ```111```/```1111```/```11111```로 비트마스킹해서 추출해본 후 맞는 경우가 있을 때 해당 값으로 리턴하도록 구현했다.   
+UTF-8 기준표는 아주 정교하게 고안되었기 때문에, ```0```/```110```/```1110```/```11110```/```10```으로 시작하는 각각의 경우의 수로 모든 문자를 구분할 수가 있다.    
 
 #### reference   
 [문자열 인코딩 개념 정리(ASCII/ANSI/EUC-KR/CP949/UTF-8/UNICODE)](https://onlywis.tistory.com/2)         
