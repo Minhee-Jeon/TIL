@@ -3,9 +3,9 @@
 ## clang-format 적용시키기
 ![workFlow](https://user-images.githubusercontent.com/58028527/91929565-a071cf80-ed19-11ea-8b65-3eb10d1e24a3.jpg)    
 현재 작업 프로세스는 이렇습니다. 프로세스 중 어떤 단계에서 지정된 코드 컨벤션을 적용시키면 될까요?   
-local과 remote 두 환경에 따라 적용시킬 방법은 이렇게 나눠집니다.      
+local(:tangerine:)과 remote(:lemon:) 두 환경에 따라 적용시킬 방법은 이렇게 나눠집니다.      
 * :tangerine: **pre-commit-hook**   
-local에서 ''' git commit ''' 명령어를 사용 시 commit 바로 전에 특정한 작동이 이뤄지도록 git에서는 ''' hook ''' 기능을 지원합니다.    
+local에서 '''git commit''' 명령어를 사용 시 commit 바로 전에 특정한 작동이 이뤄지도록 git에서는 '''hook''' 기능을 지원합니다.    
 자동으로 코드 컨벤션을 적용시켜주기 때문에 개발자가 신경쓰지 않아도 되겠죠? 여기에서 pre-commit-hook을 실현할 방법이 두 가지로 나뉘어집니다.   
    - :tangerine:01_코드 편집기의 plugin으로 clang-format을 적용시키기        
    - :tangerine:02_프로젝트 repository에서 작업   
