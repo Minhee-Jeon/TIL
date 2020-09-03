@@ -21,12 +21,60 @@ commit 시 자동으로 코드 컨벤션을 적용시켜주기 때문에 개발�
    
    
 ## :tangerine:01_integrating clang-format into editor   
+    
+[ref_VS plugin](https://devblogs.microsoft.com/cppblog/clangformat-support-in-visual-studio-2017-15-7-preview-1/)       
+[ref_vim-clang-format plugin](https://github.com/rhysd/vim-clang-format)    
+    
 ## :tangerine:02_pre-commit-hook   
+먼저 [clang-format](http://clang.llvm.org/docs/ClangFormat.html) 이 설치되어 있는지 확인하세요. **Linux**에서는 일반 ```clang``` 패키지에 포함된 것으로 설치하세요. Homebrew clang-format이 있는 MacOSX의 경우 ```brew install clang-format```을 통해 ```clang-format```을 설치하시면 됩니다.    
+    
+이제 프로젝트 repository의 ```.git/hooks``` 아래 ```.git/hooks/pre-commit```을 설치하면 됩니다. 
+예를 들면 ```cp githook-clang-format/clang-format.hook myrepo/.git/hooks/pre-commit``` 이렇게요.
+    
+githook-clang-format
+```
+#!/bin/bash
+
+STYLE=$(git config --get hooks.clangformat.style)
+if [ -n "${STYLE}" ] ; then
+  STYLEARG="-style=${STYLE}"
+else
+  STYLEARG=""
+fi
+
+format_file() {
+  file="${1}"
+  if [ -f $file ]; then
+    clang-format -i ${STYLEARG} ${1}
+    git add ${1}
+  fi
+}
+
+case "${1}" in
+  --about )
+    echo "Runs clang-format on source files"
+    ;;
+  * )
+    for file in `git diff-index --cached --name-only HEAD | grep -iE '\.(cpp|cc|h|hpp)$' ` ; do
+      format_file "${file}"
+    done
+    ;;
+esac
+```
+pre-commit hook이 설치가 되면 개발자가 commit할 때마다 add한 각 파일에 ```clang-format```이 적용됩니다.   
+
+```clang-format```은 기본으로 LLVM 스타일을 쓰도록 설정되어 있어요. 이를 변경하려면 팀에서 다같이 사용할 코드 스타일을 정해 ```.clang-format``` 파일을 커스텀해서 사용하면 됩니다. 
+
+원하는 스타일의 ```.clang-format``` 파일을 만들기 (여기서는 llvm)     
+```clang-format -style=llvm -dump-config > .clang-format``` 
+
+```git config``` 메서드를 쓰려면 repository 안에서 다음을 수행하세요.    
+```git config hooks.clangformat.style llvm````           
+[ref_01](https://gist.github.com/alexeagle/c8ed91b14a407342d9a8e112b5ac7dab), [ref_02](https://github.com/andrewseidl/githook-clang-format)    
+      
+      
+      
 ## :lemon:Jenkins' alert
 
-## reference    
-[clang-format](http://clang.llvm.org/docs/ClangFormat.html)    
-[참고(githook-clang-format1)](https://gist.github.com/alexeagle/c8ed91b14a407342d9a8e112b5ac7dab)    
-[참고(githook-clang-format2)](https://github.com/andrewseidl/githook-clang-format)    
-[VS plugin](https://devblogs.microsoft.com/cppblog/clangformat-support-in-visual-studio-2017-15-7-preview-1/)       
-[vim-clang-format plugin](https://github.com/rhysd/vim-clang-format)       
+ 
+      
