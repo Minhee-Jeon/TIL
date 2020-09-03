@@ -21,12 +21,24 @@ local에서 ```git commit``` 명령어를 사용 시 commit 바로 전에 특정
 이 방법은 개발자가 mr한 내용이 코드 컨벤션 양식을 지키지 않았다면 merge를 fail시키고 알림을 보냅니다. 
 개발자가 mr에서 merge 승인을 받기 위해서라도 commit 전 코드 컨벤션 적용을 위해 git에서 명령어를 한번씩 더 쳐야하겠죠? fail당했다면 git log도 지저분해지겠네요.    
   
-  이 방법보다는 위 두 방법을 실현시키는 게 더 좋을 듯합니다. 조금이라도 작업을 자동화할 수 있고, git graph가 더 깔끔할 테니까요.     
-   
+  이 방법보다는 위 두 방법을 실현시키는 게 더 좋을 듯합니다. 조금이라도 작업을 자동화할 수 있고, git graph가 더 깔끔할 테니까요.   
+    
+===
+## basic : customize your .clang-format file   
+ 
+![ClangFormat-File](https://user-images.githubusercontent.com/58028527/92181656-b7810080-ee84-11ea-9bae-e1f71ee32cbf.png)    
+모든 방법의 기본으로 먼저 팀에서 다같이 사용할 코드 스타일을 정해 위 사진과 같이 ```.clang-format```을 만들어 두어야 해요. 
+옵션은 [Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)를 참고해서 작성하세요.    
    
 ## :tangerine:01_integrating clang-format into editor   
     
-### Visual Studio plugin
+### Visual Studio plugin   
+
+   
+[llvm.org/builds/](http://llvm.org/builds/) 최하단의 Visual Studio plugin installer를 설치하세요.
+     
+도구 (Tools) -> 옵션 (Options) -> 텍스트 편집기 (Text Editor) -> C/C++ -> 서식 (Formatting)으로 들어가서 **사용자 지정 clang-format.exe 파일 사용** 을 선택하면 됩니다.    
+![VS_plugin](https://user-images.githubusercontent.com/58028527/92181660-b9e35a80-ee84-11ea-9931-44ea434f977d.PNG)    
 [ref_VS plugin](https://devblogs.microsoft.com/cppblog/clangformat-support-in-visual-studio-2017-15-7-preview-1/)    
      
 ### Vim plugin
@@ -70,7 +82,7 @@ esac
 ```
 pre-commit hook이 설치가 되면 개발자가 commit할 때마다 add한 각 파일에 ```clang-format```이 적용됩니다.   
 
-```clang-format```은 기본으로 LLVM 스타일을 쓰도록 설정되어 있어요. 이를 변경하려면 팀에서 다같이 사용할 코드 스타일을 정해 ```.clang-format``` 파일을 커스텀해서 사용하면 됩니다. 
+```clang-format```은 기본으로 LLVM 스타일을 쓰도록 설정되어 있어요. 이를 변경하려면 작성해 둔 ```.clang-format``` 파일을 사용하면 됩니다. 
 
 원하는 스타일의 ```.clang-format``` 파일을 만들기 (여기서는 llvm)     
 ```clang-format -style=llvm -dump-config > .clang-format``` 
