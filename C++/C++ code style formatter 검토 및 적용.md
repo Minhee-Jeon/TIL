@@ -23,7 +23,7 @@ local에서 ```git commit``` 명령어를 사용 시 commit 바로 전에 특정
   
   이 방법보다는 위 두 방법을 실현시키는 게 더 좋을 듯합니다. 조금이라도 작업을 자동화할 수 있고, git graph가 더 깔끔할 테니까요.   
     
-===
+---
 ## basic : customize your .clang-format file   
  
 ![ClangFormat-File](https://user-images.githubusercontent.com/58028527/92181656-b7810080-ee84-11ea-9bae-e1f71ee32cbf.png)    
@@ -45,11 +45,11 @@ local에서 ```git commit``` 명령어를 사용 시 commit 바로 전에 특정
 [ref_vim-clang-format plugin](https://github.com/rhysd/vim-clang-format)    
     
 ## :tangerine:02_pre-commit-hook   
-먼저 [clang-format](http://clang.llvm.org/docs/ClangFormat.html) 이 설치되어 있는지 확인하세요. **Linux**에서는 일반 ```clang``` 패키지에 포함된 것으로 설치하세요. Homebrew clang-format이 있는 MacOSX의 경우 ```brew install clang-format```을 통해 ```clang-format```을 설치하시면 됩니다.    
+먼저 [clang-format](http://clang.llvm.org/docs/ClangFormat.html) 이 설치되어 있는지 확인하세요. **Linux**에서는 일반 `clang` 패키지에 포함된 것으로 설치하세요. Homebrew clang-format이 있는 `MacOSX`의 경우 `brew install clang-format`을 통해 `clang-format`을 설치하시면 됩니다.    
     
-이제 프로젝트 repository의 ```.git/hooks``` 아래 ```clang-format.hook```을 설치하면 됩니다. ```pre-commit-hook```이 없다면 ```clang-format.hook```을 ```.git/hooks/pre-commit```으로 복사하세요. 예를 들면 ```cp githook-clang-format/clang-format.hook myrepo/.git/hooks/pre-commit``` 이렇게요.
+이제 프로젝트 repository의 `.git/hooks` 아래 `clang-format.hook`을 설치하면 됩니다. `pre-commit-hook`이 없다면 `clang-format.hook`을 `.git/hooks/pre-commit`으로 복사하세요. 예를 들면 `cp githook-clang-format/clang-format.hook myrepo/.git/hooks/pre-commit` 이렇게요.
     
-githook-clang-format
+clang-format.hook
 ```
 #!/bin/bash
 
