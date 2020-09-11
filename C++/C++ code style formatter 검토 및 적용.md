@@ -47,8 +47,7 @@ local에서 ```git commit``` 명령어를 사용 시 commit 바로 전에 특정
 ## :tangerine:02_pre-commit-hook   
 먼저 [clang-format](http://clang.llvm.org/docs/ClangFormat.html) 이 설치되어 있는지 확인하세요. **Linux**에서는 일반 ```clang``` 패키지에 포함된 것으로 설치하세요. Homebrew clang-format이 있는 MacOSX의 경우 ```brew install clang-format```을 통해 ```clang-format```을 설치하시면 됩니다.    
     
-이제 프로젝트 repository의 ```.git/hooks``` 아래 ```.git/hooks/pre-commit```을 설치하면 됩니다. 
-예를 들면 ```cp githook-clang-format/clang-format.hook myrepo/.git/hooks/pre-commit``` 이렇게요.
+이제 프로젝트 repository의 ```.git/hooks``` 아래 ```clang-format.hook```을 설치하면 됩니다. ```pre-commit-hook```이 없다면 ```clang-format.hook```을 ```.git/hooks/pre-commit```으로 복사하세요. 예를 들면 ```cp githook-clang-format/clang-format.hook myrepo/.git/hooks/pre-commit``` 이렇게요.
     
 githook-clang-format
 ```
