@@ -8,8 +8,8 @@
 class Solution {
 public:
     int reverse(int x) {
-        maxInt = 2147483647;
-        minInt = -2147483648;
+        int maxInt = 2147483647;
+        int minInt = -2147483648;
         
         int pop = 0;
         int temp = 0;
