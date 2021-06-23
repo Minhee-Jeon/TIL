@@ -31,7 +31,8 @@ public:
 하지만, 3, 5 라고 한다면 `arr[3] + arr[4] + arr[5]` 의 결과를 반환해야 한다.
 `sumRange(3, 5)` 는 `sumRange(0, 5) - sumRange(0, 2)`다.          
 `sumRange(0, 2) = arr[0] + arr[1] + arr[2]` 이다.
-여기에 착안해 0 부터 `nums.length()-1` 까지의 합을 저장해두고, 그때그때 계산해주었다.         
+여기에 착안해 0 부터 `nums.length()-1` 까지의 합을 저장해두고, 그때그때 계산해주었다.       
+```cpp
 class NumArray {
 public:
     vector<int> vec;
@@ -53,3 +54,4 @@ public:
 
 // Runtime: 24 ms, faster than 58.22% of C++ online submissions for Range Sum Query - Immutable.
 // Memory Usage: 17.1 MB, less than 33.79% of C++ online submissions for Range Sum Query - Immutable.
+```
