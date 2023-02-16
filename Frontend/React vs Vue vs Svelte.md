@@ -35,4 +35,7 @@ React와 Vue는 Virtual DOM을 이용해 기존의 프론트엔드 라이브러�
 [Svelte 쓰면서 느낀 장단점](https://blog.ashrimp.dev/posts/personal-svelte-pros-and-cons/index.html)            
         
 ![performance](https://user-images.githubusercontent.com/58028527/219243167-23d18a5c-8b15-40d9-b3bf-d95c0262c937.PNG)          
-![transferSize](https://user-images.githubusercontent.com/58028527/219243194-37ee0a72-122b-4c15-9ecf-81b687e3c6e1.PNG)              
+![transferSize](https://user-images.githubusercontent.com/58028527/219243194-37ee0a72-122b-4c15-9ecf-81b687e3c6e1.PNG)          
+
+[React vs Vue 장단점 비교](https://velog.io/@leehaeun0/React-vs-Vue-%EC%9E%A5%EB%8B%A8%EC%A0%90-%EB%B9%84%EA%B5%90)          
+[스벨트 vs 리액트, 누가 더 뛰어날까?](https://yozm.wishket.com/magazine/detail/1176/)           
