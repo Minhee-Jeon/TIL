@@ -62,3 +62,74 @@ subClass = new LabeledPastGrades(); // ok
 subClass = new PastGrades(); // ok
 
 // 2. 재정의된 생성자
+// JS에서 하위 클래스가 자체 생성자를 선언하면 super를 통해 기본 클래스 생성자를 호출해야 한다.
+class GradeAnnouncer {
+    message: string;
+
+    constructor(grade: number) {
+        this.message = grade >= 65 ? 'Maybe next time...' : 'You pass!'
+    }
+}
+
+class PassingAnnouncer extends GradeAnnouncer {
+    constructor() {
+        super(100)
+    }
+}
+
+class FailingAnnouncer extends GradeAnnouncer {
+    // constructor() { }
+    // Constructors for derived classes must contain a 'super' call.
+}
+
+// JS 규칙: 하위 클래스의 생성자는 this 또는 super에 접근하기 전에 반드시 기본 클래스의 생성자를 호출해야 한다.
+class GradesTally {
+    grades: number[] = []
+
+    addGrades(...grades: number[]) {
+        this.grades.push(...grades)
+        return this.grades.length
+    }
+}
+
+class ContinuedGradesTally extends GradesTally {
+    constructor(previousGrades: number[]) {
+        // this.grades =[...previousGrades]
+        // 'super' must be called before accessing 'this' in the constructor of a derived class.
+
+        super()
+
+        console.log('Starting with length', this.grades.length)
+    }
+}
+
+// 3. 재정의된 메서드
+// 하위 클래스의 메서드가 기본 클래스의 메서드에 할당될 수 있는 한 하위 클래스는
+// 기본 클래스와 동일한 이름으로 새 메서드를 다시 선언할 수 있다.
+class GradeCounter {
+    countGrades(grades: string[], letter: string) {
+        return grades.filter(grade => grade === letter).length
+    }
+}
+
+class FailureCounter extends GradeCounter {
+    countGrades(grades: string[]) {
+        return super.countGrades(grades, 'F')
+    }
+}
+
+class AnyFailureChecker extends GradeCounter {
+    countGrades(grades: string[]) {
+        // Property 'countGrades' in type 'AnyFailureChecker' is not assignable to the same property in base type 'GradeCounter'.
+        //     Type '(grades: string[]) => boolean' is not assignable to type '(grades: string[], letter: string) => number'.
+        //         Type 'boolean' is not assignable to type 'number'.
+        return super.countGrades(grades, 'F') !== 0
+    }
+}
+
+const counter: GradeCounter = new AnyFailureChecker()
+
+// 예상 타입: number / 실제 타입: boolean
+const count = counter.countGrades(['A', 'C', 'F'], 'F')
+
+// 4. 재정의된 속성
